@@ -1,0 +1,29 @@
+{
+  "project": "exp983-gambler-god",
+  "created_at": "2026-04-07T05:06:24.629085+00:00",
+  "github_repo": "ykzhujiang/exp983-gambler-god",
+  "config": {
+    "theme": "数学博士被迫入赌场，用概率论碾压老千",
+    "genre": "赌术/智斗/逆袭/喜剧",
+    "style": "realistic",
+    "duration": 60,
+    "characters": 2,
+    "setting": "中国·当代·都市地下赌场",
+    "appearance": "east-asian"
+  },
+  "status": "not_started",
+  "steps": {
+    "step1b": {
+      "status": "not_started"
+    },
+    "step3": {
+      "status": "not_started"
+    },
+    "step4": {
+      "status": "not_started"
+    },
+    "step6": {
+      "status": "not_started"
+    }
+  }
+}
