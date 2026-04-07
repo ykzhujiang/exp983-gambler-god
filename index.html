@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXP-983 赌神觉醒：数学天才的逆袭 | V6分镜剧本</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card-bg: #161b22;
+  --card-border: #30363d;
+  --text: #e6edf3;
+  --text-secondary: #8b949e;
+  --accent: #58a6ff;
+  --dialogue-bg: rgba(88,166,255,0.08);
+  --dialogue-color: #79c0ff;
+  --part-num-color: #f0883e;
+  --camera-bg: rgba(139,148,158,0.08);
+  --header-gradient: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 16px;
+}
+/* Header */
+.page-header {
+  background: var(--header-gradient);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #58a6ff, #bc8cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.meta-tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 99px;
+  background: rgba(88,166,255,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(88,166,255,0.2);
+}
+/* Collapsible sections */
+details {
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: var(--card-bg);
+}
+details summary {
+  padding: 14px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  user-select: none;
+}
+details summary:hover { color: var(--text); }
+details[open] summary { border-bottom: 1px solid var(--card-border); }
+.section-body {
+  padding: 12px 16px;
+}
+/* Character items */
+.char-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(48,54,61,0.5);
+  font-size: 14px;
+}
+.char-item:last-child { border-bottom: none; }
+.char-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.char-desc {
+  display: block;
+  margin-top: 4px;
+  margin-left: 16px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+/* Scene items */
+.scene-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(48,54,61,0.5);
+  font-size: 14px;
+}
+.scene-item:last-child { border-bottom: none; }
+.scene-desc {
+  display: block;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+/* Segment card */
+.segment-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.segment-card:hover {
+  border-color: rgba(88,166,255,0.4);
+}
+.segment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px 8px;
+}
+.segment-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.segment-dur {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(240,136,62,0.12);
+  color: var(--part-num-color);
+}
+.segment-meta {
+  padding: 0 16px 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+/* Physical state inside segment */
+.segment-card .physical-state {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(139,148,158,0.03);
+}
+.segment-card .physical-state summary {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ps-item {
+  padding: 4px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+/* Parts */
+.parts-container {
+  padding: 10px 16px 6px;
+}
+.part-line {
+  padding: 8px 0;
+  font-size: 15px;
+  line-height: 1.8;
+  border-bottom: 1px solid rgba(48,54,61,0.3);
+}
+.part-line:last-child { border-bottom: none; }
+.part-num {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--part-num-color);
+  background: rgba(240,136,62,0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.char-tag {
+  font-weight: 600;
+}
+.dialogue {
+  color: var(--dialogue-color);
+  background: var(--dialogue-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-style: italic;
+}
+/* Camera */
+.camera-line {
+  padding: 8px 16px 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--camera-bg);
+  border-top: 1px solid var(--card-border);
+}
+/* Stats */
+.stats-bar {
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.stats-bar span {
+  margin: 0 8px;
+}
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .container { padding: 10px; }
+  .page-header { padding: 18px 14px; }
+  .page-header h1 { font-size: 19px; }
+  .part-line { font-size: 14px; }
+  .segment-header { padding: 10px 12px 6px; }
+  .parts-container { padding: 8px 12px 4px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="page-header">
+  <h1>EXP-983 赌神觉醒：数学天才的逆袭 | V6分镜剧本</h1>
+  <div class="meta-tags">
+    <span class="meta-tag">🎬 realistic</span>
+    <span class="meta-tag">🌍 中国·当代·都市</span>
+    <span class="meta-tag">🎨 cinematic thriller, dim amber lighting, ...</span>
+    <span class="meta-tag">📊 16 segments</span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <span>👤 5 角色</span>
+  <span>🏞️ 6 场景</span>
+  <span>🎬 16 分镜</span>
+</div>
+
+<details>
+  <summary>👤 角色设定 (5)</summary>
+  <div class="section-body"><div class="char-item"><span class="char-dot" style="background:#e74c3c"></span><strong>[林数]</strong><span class="char-desc">28岁男性，身高174cm偏瘦体型，面色苍白有黑眼圈，椭圆脸戴银框圆眼镜，络腮胡三天没刮，鼻梁高挺嘴唇薄，黑色蓬乱中长发盖住额头，身穿起球的深灰色卫衣和皱巴巴的黑色运动裤白色脏帆布鞋。手指修长常不自觉地敲桌面算概率。</span></div>
+<div class="char-item"><span class="char-dot" style="background:#3498db"></span><strong>[老钱]</strong><span class="char-desc">55岁男性，身高170cm微胖圆润体型，肤色偏黄面带红润，国字脸浓眉三角眼厚嘴唇笑起来和蔼但眼神阴冷，黑色稀疏大背头抹了发油，身穿深棕色中式盘扣唐装内搭白色圆领衫，左手戴翡翠扳指右手持紫砂壶。</span></div>
+<div class="char-item"><span class="char-dot" style="background:#2ecc71"></span><strong>[苏媛]</strong><span class="char-desc">26岁女性，身高167cm匀称体型，皮肤白皙冷白调，瓜子脸高颧骨丹凤眼薄嘴唇，黑色直长发束低马尾，身穿黑色修身西装外套内搭白色丝质衬衫搭配黑色西裤尖头高跟鞋。表情清冷淡漠。</span></div>
+<div class="char-item"><span class="char-dot" style="background:#f39c12"></span><strong>[赵四指]</strong><span class="char-desc">42岁男性，身高178cm精壮干瘦体型，古铜色皮肤布满皱纹，长脸鹰钩鼻细长眼笑起来嘴角歪，右手缺小指（赌输被切），黑色短寸头鬓角花白，身穿酒红色丝质衬衫袖口挽到小臂露出龙纹纹身配黑色西裤。</span></div>
+<div class="char-item"><span class="char-dot" style="background:#9b59b6"></span><strong>[追债阿龙]</strong><span class="char-desc">35岁男性，身高182cm壮硕体型，小麦色皮肤，圆脸小眼塌鼻，寸头脖子粗，身穿黑色紧身T恤金项链配迷彩工装裤。</span></div>
+</div>
+</details>
+
+<details>
+  <summary>🏞️ 场景描述 (6)</summary>
+  <div class="section-body"><div class="scene-item"><strong>[大学办公室-日]</strong><span class="scene-desc">当代某大学数学系办公室，白色日光灯照明，金属文件柜靠墙，杂乱的书桌上堆满论文和教材，墙上贴着数学公式海报和学术会议通知，窗外是校园梧桐树。</span></div>
+<div class="scene-item"><strong>[地下赌场-大厅]</strong><span class="scene-desc">地下室改造的赌场大厅，暗红色地毯配暗金色墙纸，顶部垂吊暖黄色水晶灯半亮半暗，烟雾缭绕，四周摆着多张绿色绒面赌桌，角落有吧台和沙发，空气中弥漫雪茄味。</span></div>
+<div class="scene-item"><strong>[地下赌场-VIP包间]</strong><span class="scene-desc">赌场深处VIP包间，正中一张椭圆形深绿绒面德州扑克桌，顶部聚光灯直射桌面其余区域昏暗，红木隔断墙上挂着仿古山水画，角落立着老虎机和保险柜。</span></div>
+<div class="scene-item"><strong>[监控室]</strong><span class="scene-desc">赌场二楼监控室，一整面墙排列着十二个液晶监控屏幕发出冷蓝光，操控台上放着对讲机和烟灰缸，唯一光源来自屏幕。</span></div>
+<div class="scene-item"><strong>[出租屋-夜]</strong><span class="scene-desc">城中村狭小出租屋，单人铁架床对面一张折叠桌，桌上堆满数学教材和草稿纸，墙上贴满A4纸手写的概率公式和赌局推演图，角落泡面箱子，窗户透进霓虹灯光。</span></div>
+<div class="scene-item"><strong>[赌场走廊-暗]</strong><span class="scene-desc">连接VIP包间的昏暗走廊，暗红色壁灯间隔两米一盏，水泥地面铺着磨损的暗色地毯，尽头是防火铁门。</span></div>
+</div>
+</details>
+
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 1</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [大学办公室-日] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面中央，坐在办公椅上，双手撑着额头，视线低垂看着桌面的手机屏幕。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>白色日光灯下，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>坐在杂乱的办公桌前双手撑额，面色灰白，手机屏幕亮着一条短信：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"导师张教授已携款出境"</span></span>。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>右手颤抖着拿起手机，眼镜片反射屏幕冷光，嘴唇紧抿眉头深锁，喉结上下滚动。</div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>苦笑着自言自语：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"347万……月薪5000……需要57.8年。比我预期寿命还长3.2年。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，缓慢推向林数面部，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 2</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [大学办公室-日] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#9b59b6">[追债阿龙]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，坐姿，身体后缩靠向椅背，双手抓住扶手，视线面向<span class="char-tag" style="color:#9b59b6">[追债阿龙]</span>。</div><div class="ps-item">**<span class="char-tag" style="color:#9b59b6">[追债阿龙]</span>**: 画面右侧，站立，双手抱胸堵在门口，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>办公室门被猛地推开，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>粗壮的身躯堵满门框，金项链在日光灯下反光，双手抱胸俯视<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>拿出一张借条拍在桌上，鼻孔朝天说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"林博士，你导师跑了，这笔账你来还。三天，347万。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>身体往后缩，右手不自觉地推了一下眼镜，嘴唇哆嗦，小声说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"我……我只是个读博的，我没钱……"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>咧嘴一笑露出金牙，弯腰凑近说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"没钱？你不是数学天才吗——会算数就行，跟我走。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 近景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 3</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-大厅] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#9b59b6">[追债阿龙]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，站立，双肩缩起双手插在卫衣口袋里，视线四处张望不安。</div><div class="ps-item">**<span class="char-tag" style="color:#9b59b6">[追债阿龙]</span>**: 画面右侧，站立，右手搭在林数肩膀上往前推，视线面向前方。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>暗红色地毯上烟雾缭绕，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>被<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>推着走进赌场大厅，吞咽口水，瞳孔在昏暗灯光中放大，缩着肩膀像只受惊的猫。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>的内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"赌场……空气中PM2.5浓度预估超标400%……二手烟致癌概率——不对，现在不是想这个的时候。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>用力拍了一下<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>的后背，咧嘴笑着说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"别怂！赢一场抵十万，赢35场你就自由了。简单算术嘛。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 全景，略俯角度，跟随两人向前移动，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 4</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-大厅] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#3498db">[老钱]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，站立，双手从口袋里抽出来垂在身侧，手指不自觉敲大腿，视线面向<span class="char-tag" style="color:#3498db">[老钱]</span>。</div><div class="ps-item">**<span class="char-tag" style="color:#3498db">[老钱]</span>**: 画面右侧，坐在吧台旁的红木太师椅上，右手端紫砂壶，左手搭在扶手上翡翠扳指反光，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>坐在太师椅上端着紫砂壶，眯着三角眼上下打量<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>，嘴角挂着和蔼的笑但眼神阴冷。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>慢悠悠抿了口茶说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"这就是张教授的高徒？看着……有点营养不良啊。年轻人，会打德州吗？"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>咽了口口水，手指在大腿上飞速敲击五下，眼神躲闪说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不……不太会。我只在论文里研究过博弈论模型。"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>放下紫砂壶，翡翠扳指在扶手上叩了三下，笑着说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不会就对了。运气这东西，可不是数学能算的。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 5</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面中央偏左，坐在绿绒面赌桌前，双手放在桌面上十指交叉，视线面向对面空位，背部僵直。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>聚光灯直射绿绒面赌桌，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>坐在牌桌前，额头渗出细汗，银框眼镜滑到鼻尖，十指交叉的手在微微颤抖。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>的内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"德州扑克，52张牌，翻牌前我拿到口袋对子的概率5.88%……冷静，把它当期末考。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>深吸一口气闭上眼，再睁开时瞳孔聚焦，右手食指在桌面上无意识地画着正态分布曲线。</div>
+
+  </div>
+  <div class="camera-line">🎥 特写，略俯角度，从林数颤抖的手缓慢上摇到面部，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 6</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面中央偏左，坐姿，右手拿着两张底牌微微掀起角看，左手按在桌沿，视线低垂看牌。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>右手拇指和食指轻轻掀起底牌一角，瞳孔急速收缩——红心K和黑桃K，嘴角不受控制地抽搐了一下。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>强迫自己面无表情，但左手指节发白地按住桌沿，内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"口袋K……翻牌前胜率大约83%……心跳148……这个概率对心脏不太友好。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>用颤抖的声音说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"跟……跟注。"</span></span>声音小得像蚊子嗡嗡。</div>
+
+  </div>
+  <div class="camera-line">🎥 特写，平视角度，固定机位聚焦林数掀牌的手指和面部微表情，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 7</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面中央，坐姿，身体前倾，双手撑在桌沿，视线紧盯桌面中央的公共牌。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>公共牌翻开——红心7、方块K、黑桃3，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>瞳孔猛地放大，嘴唇微微分开，三条K的兴奋差点从脸上溢出来。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>咬住下嘴唇强行压制表情，右手抓紧筹码，左手在桌下疯狂敲膝盖，内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"三条……翻牌后赢面97.3%……别激动……表情管理……"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>挤出一个痛苦的表情假装犹豫，结结巴巴地说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"那……那我加注吧……一点点。"</span></span>然后把面前三分之二的筹码推了出去。</div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 8</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#9b59b6">[追债阿龙]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，坐姿，全身瘫软靠向椅背，双手无力垂在身侧，面色惨白。</div><div class="ps-item">**<span class="char-tag" style="color:#9b59b6">[追债阿龙]</span>**: 画面右侧，站在林数身后，双手举过头顶握拳，嘴巴张到最大。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>最后一张公共牌翻开，对手扔牌认输，筹码被推向<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>面前堆成小山，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>整个人像断了电一样瘫在椅子上。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>在旁边激动得蹦起来双手握拳高举过头顶嘶吼，脖子上的金项链甩得叮当响。</div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>面色惨白地摆手说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"可……可以了。再多我要交个人所得税……超过800块的偶然所得要扣20%……"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#9b59b6"</span></span>>[追债阿龙]</span>一脸懵逼地说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"你赢了十万你跟我算税？"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 9</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [监控室] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#2ecc71">[苏媛]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#2ecc71">[苏媛]</span>**: 画面中央，坐在监控台前的转椅上，右手撑着下巴，视线面向正前方的监控屏幕。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>冷蓝色监控屏幕阵列映在<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>脸上，她右手撑着下巴，丹凤眼微微眯起，死死盯着其中一个屏幕里的<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>左手在操控台上回放录像，画面定格在林数掀牌前手指敲桌面的特写，她的嘴角微微动了一下。</div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>低声自语：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不是运气……掀牌前他的手指敲了五下，跟注时敲了三下。他在算。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 近景，平视角度，缓慢推向苏媛面部和屏幕，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 10</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [监控室] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#2ecc71">[苏媛]</span>, <span class="char-tag" style="color:#3498db">[老钱]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#2ecc71">[苏媛]</span>**: 画面左侧，坐姿，身体转向右侧面向<span class="char-tag" style="color:#3498db">[老钱]</span>，双手放在膝盖上。</div><div class="ps-item">**<span class="char-tag" style="color:#3498db">[老钱]</span>**: 画面右侧，站在监控室门口，右手端紫砂壶，身体靠着门框，视线看向监控屏幕。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>端着紫砂壶慢悠悠走进监控室，三角眼扫过屏幕上林数的画面，翡翠扳指在壶盖上轻轻叩了两下。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>笑眯眯地说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"这小子有点意思。运气好得不正常啊。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>面无表情地转过头，语气平淡说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不是运气好，是数学好。他在用概率计算打牌。"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>笑容不变但眼底闪过一丝寒光，抿了口茶说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"数学好？那就让四指试试他的数学——够不够硬。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 11</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-大厅] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#3498db">[老钱]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，站立，双手抱着装筹码的托盘贴在胸前，身体微微后退，视线面向<span class="char-tag" style="color:#3498db">[老钱]</span>。</div><div class="ps-item">**<span class="char-tag" style="color:#3498db">[老钱]</span>**: 画面右侧，站立，左手背在身后右手端紫砂壶，身体前倾微笑，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>抱着筹码托盘想溜，被<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>堵在大厅出口，双腿微微发软脚后跟蹭地面后退半步。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>笑容满面地说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"小林啊，赢了就跑不厚道。明天VIP桌，赌注翻十倍。赢了，三场就能清账。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>吞咽口水说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"我……今天只是运气好……概率上不可能连续——"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#3498db"</span></span>>[老钱]</span>凑近一步，笑着但声音压低说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"你导师欠的可不只是钱，还有人情。你懂的。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 近景，平视角度，缓慢推镜头，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 12</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#f39c12">[赵四指]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，坐在赌桌前，双手平放桌面，身体僵直，视线面向<span class="char-tag" style="color:#f39c12">[赵四指]</span>。</div><div class="ps-item">**<span class="char-tag" style="color:#f39c12">[赵四指]</span>**: 画面右侧，坐在赌桌对面，翘着二郎腿，右手四根手指在桌面上轻轻敲击，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>嘴角歪笑。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>VIP包间聚光灯下，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#f39c12"</span></span>>[赵四指]</span>翘着二郎腿坐在对面，右手四根手指在绿绒面上有节奏地敲击，缺了小指的手格外醒目。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#f39c12"</span></span>>[赵四指]</span>歪嘴一笑，抬起右手晃了晃四根手指说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"听说你数学好？小子，数学在赌桌上比不过这个——经验。这根手指就是学费。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>盯着那只缺指的手，喉结上下滚动，眼镜片后面的瞳孔微微收缩，手指在桌面下飞速敲击。</div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>的内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"右手缺小指……但刚才敲桌面的节奏非常稳……是练过魔术或换牌手法的手。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 13</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#f39c12">[赵四指]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，坐姿，身体前倾，右手拿牌左手食指推眼镜，视线紧盯<span class="char-tag" style="color:#f39c12">[赵四指]</span>的双手。</div><div class="ps-item">**<span class="char-tag" style="color:#f39c12">[赵四指]</span>**: 画面右侧，坐姿，双手在洗牌做花式切牌，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>挑衅地挑起眉毛。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#f39c12"</span></span>>[赵四指]</span>双手将一副牌在空中做花式瀑布洗牌，四根手指灵活得像弹钢琴，嘴里说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"来吧书呆子，今天教教你什么叫实战。"</span></span></div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>死死盯着赵四指的手部动作，瞳孔跟着牌的轨迹快速移动，左手食指把滑落的眼镜推回鼻梁。</div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>的内心独白说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"洗牌第三次，右手无名指多了一个勾牌动作——他在做底牌标记。贝叶斯更新：他出千的后验概率……94.7%。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 特写，平视角度，从赵四指的手部缓慢摇到林数的眼部，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 14</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [地下赌场-VIP包间] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#f39c12">[赵四指]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，坐姿，身体后靠，双手抱胸，嘴角微微上翘，视线面向桌面。</div><div class="ps-item">**<span class="char-tag" style="color:#f39c12">[赵四指]</span>**: 画面右侧，坐姿，身体前倾双手撑桌，额头青筋暴起，视线怒瞪桌面的牌。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>翻牌结束，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#f39c12"</span></span>>[赵四指]</span>自信满满翻开底牌却愣住——他做了标记的黑桃A变成了方块2，额头青筋暴起嘴角抽搐。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>慢慢翻开底牌露出一对A，然后有点不好意思地推了推眼镜，小声说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不是我运气好……是你第三次洗牌的时候无名指多勾了0.3秒，标记偏了一张。"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#f39c12"</span></span>>[赵四指]</span>猛拍桌面站起来吼道：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"你怎么可能看出来！"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>缩了一下脖子但声音平静说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"不是看出来的……是算出来的。贝叶斯定理，你的每个动作都在更新我的概率模型。"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 15</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [赌场走廊-暗] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span>, <span class="char-tag" style="color:#2ecc71">[苏媛]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面左侧，站立靠着墙壁，右手扶着墙，左手捂着狂跳的心脏，视线看向地面。</div><div class="ps-item">**<span class="char-tag" style="color:#2ecc71">[苏媛]</span>**: 画面右侧，站立，双手插在西装裤口袋里，身体靠着对面墙壁，视线面向<span class="char-tag" style="color:#e74c3c">[林数]</span>。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>昏暗走廊里<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>靠着墙壁大口喘气，左手死死捂住胸口，眼镜歪了也顾不上扶，双腿发软几乎站不住。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>从阴影中走出来靠在对面墙上，丹凤眼冷冷地打量着<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>，嘴角没有任何弧度。</div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#2ecc71"</span></span>>[苏媛]</span>语气平淡说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"你的心率现在大概155。作为一个靠概率吃饭的人，你应该知道这个数字对心脏不友好。"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>抬头看向苏媛，眼镜片反射走廊暗红壁灯，结巴着说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"你……你也会算？"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，固定机位，正常速度。</div>
+</div>
+
+<div class="segment-card">
+  <div class="segment-header">
+    <span class="segment-num">Segment 16</span>
+    <span class="segment-dur">≤15s</span>
+  </div>
+  <div class="segment-meta">📍 [出租屋-夜] &nbsp;|&nbsp; 👥 <span class="char-tag" style="color:#e74c3c">[林数]</span></div>
+  <details class="physical-state">
+<summary>📐 Physical State</summary>
+<div class="ps-item">**<span class="char-tag" style="color:#e74c3c">[林数]</span>**: 画面中央，站在贴满公式的墙面前，右手拿红色马克笔在A4纸上写字，左手捏着下巴，视线面向墙面。</div>
+</details>
+  <div class="parts-container">
+    <div class="part-line"><span class="part-num">P1</span>城中村出租屋里，<span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>站在贴满概率公式的墙面前，右手拿红色马克笔在A4纸上疯狂推演，瞳孔放大嘴里念念有词。</div>
+<div class="part-line"><span class="part-num">P2</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>自言自语：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"赵四指的出千手法有3种模式……但如果老钱知道他出千还让他上……说明这不是赌局，是测试。他们在试探我的上限……"</span></span></div>
+<div class="part-line"><span class="part-num">P3</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>停下笔，摘下眼镜揉了揉酸涩的眼睛，口袋里手机突然震动——屏幕亮起一条匿名短信：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"明天的牌局，底牌是假的。——S"</span></span></div>
+<div class="part-line"><span class="part-num">P4</span><span class=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"char-tag"</span></span> style=<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"color:#e74c3c"</span></span>>[林数]</span>盯着手机屏幕，瞳孔急剧收缩，手指不自觉地在手机壳上敲了五下，低声说：<span class=<span class="dialogue">"dialogue"</span>><span class="dialogue">"S……苏媛？她为什么帮我？"</span></span></div>
+
+  </div>
+  <div class="camera-line">🎥 中景，平视角度，从墙面公式缓慢摇向林数面部再到手机屏幕，正常速度。</div>
+</div>
+
+
+</div>
+
+<script>
+// Auto-open first segment's physical state on load (optional interactivity)
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll spy - highlight current segment
+  const cards = document.querySelectorAll('.segment-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.borderColor = 'rgba(88,166,255,0.5)';
+      } else {
+        e.target.style.borderColor = '';
+      }
+    });
+  }, { threshold: 0.3 });
+  cards.forEach(c => observer.observe(c));
+});
+</script>
+</body>
+</html>
